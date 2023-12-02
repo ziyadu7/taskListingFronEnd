@@ -34,6 +34,9 @@ function Register() {
     }else{
       setErr('')
       axiosInstance.post('/register',{email,password}).then(res=>{
+        setLoginPage(true)
+        setEmail('')
+        setPassword('')
         toast.success(res?.data?.message)
         setLoginPage(true)
       }).catch(err=>{
