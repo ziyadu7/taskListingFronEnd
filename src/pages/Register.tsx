@@ -18,11 +18,15 @@ function Register() {
     }else{
       setErr('')
       axiosInstance.post('/login',{email,password}).then(res=>{
+        localStorage.setItem('token',res?.data?.token)
         console.log(res.data);  
         navigate('/home')
       }).catch(err=>{
         if(err?.response?.data?.errMsg){
           toast.error(err?.response?.data?.errMsg)
+        }else if(err){
+          console.log(err)
+          toast.error(err?.message)          
         }
       })
     }
