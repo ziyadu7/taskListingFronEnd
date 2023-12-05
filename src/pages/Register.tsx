@@ -20,7 +20,7 @@ function Register() {
       axiosInstance.post('/login',{email,password}).then(res=>{
         localStorage.setItem('token',res?.data?.token)
         console.log(res.data);  
-        navigate('/notes')
+        navigate('/')
       }).catch(err=>{
         if(err?.response?.data?.errMsg){
           toast.error(err?.response?.data?.errMsg)
