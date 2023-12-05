@@ -1,22 +1,15 @@
-import { Route, Routes, BrowserRouter as Router, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Route, Routes, BrowserRouter as Router, Navigate } from 'react-router-dom'
 import Register from './pages/Register'
 import Notes from './pages/Notes'
 
 function App() {
 
-  const navigate = useNavigate()
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      navigate('/signIn')
-    }
-  })
+  const token = localStorage.getItem('token')
   return (
     <Router>
       <Routes>
-        <Route path="/signIn" element={<Register />} />
-        <Route path="/" element={<Notes/>} />
+        <Route path="/signIn" element={token ? <Navigate to={'/'} /> : <Register />} />
+        <Route path="/" element={token ? <Notes /> : <Navigate to={'/signIn'} />} />
       </Routes>
     </Router>
   )
